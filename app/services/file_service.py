@@ -1,8 +1,6 @@
-import logging
 from pathlib import Path
 from fastapi import UploadFile
 
-logger = logging.getLogger(__name__)
 BASE_DIR = Path('data/docs')
 
 async def save_uploaded_file(file: UploadFile) -> str:
@@ -12,8 +10,8 @@ async def save_uploaded_file(file: UploadFile) -> str:
         with open(file_path, "wb") as f:
             f.write(await file.read())
 
-        logger.info(f"File saved successfully: {file_path}")
+        print(f"File saved successfully: {file_path}")
         return str(file_path)
     except Exception as e:
-        logger.error(f"Error saving file {file.filename}: {str(e)}")
+        print(f"Error saving file {file.filename}: {str(e)}")
         return ""
